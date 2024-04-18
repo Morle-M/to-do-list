@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    restart: always
+  database:
+    build: ./database
+    ports:
+      - "5432:5432"
+    restart: always

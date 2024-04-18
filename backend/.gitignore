@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Environment variables file
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# npm debugging logs
+npm-debug.log*
