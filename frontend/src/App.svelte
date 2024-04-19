@@ -11,5 +11,11 @@
 </main>
 
 <style>
-  /* Stile für die Hauptanwendung */
+  h1 {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    margin-bottom: 100px;
+    font-family: fantasy;
+  }
 </style>
