@@ -10,4 +10,9 @@ services:
     build: ./database
     ports:
       - "5432:5432"
+    volumes:
+      - 'database:/bitnami/postgresql'
     restart: always
+volumes:
+  database:
+    driver: local
