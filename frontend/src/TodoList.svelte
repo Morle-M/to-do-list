@@ -5,7 +5,7 @@
     let todos = writable([]);
 
     async function fetchTodos() {
-      const response = await fetch('http://backend:3000/todos');
+      const response = await fetch('http://localhost:3000/todos');
       const data = await response.json();
       todos.set(data);
     }
@@ -13,7 +13,7 @@
     onMount(fetchTodos);
 
     async function deleteTodo(todoId) {
-      const response = await fetch(`http://backend:3000/todos/${todoId}`, {
+      const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
         method: 'DELETE'
       });
       if (response.ok) {
@@ -22,7 +22,7 @@
     }
   
     async function updateTodoName(todoId, newName) {
-      const response = await fetch(`http://backend:3000/todos/${todoId}/${newName}`, {
+      const response = await fetch(`http://localhost:3000/todos/${todoId}/${newName}`, {
         method: 'PUT'
       });
       if (response.ok) {
@@ -67,6 +67,7 @@
       padding: 20px;
       max-width: 800px;
       margin: auto;
+      margin-bottom: 10px;
       background-color: #f8f9fa;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

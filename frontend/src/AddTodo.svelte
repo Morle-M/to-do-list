@@ -6,7 +6,7 @@
   async function addTodo() {
     const title = $newTodo;
     if (title.trim() !== '') {
-      const response = await fetch(`http://backend:3000/todos/${title}`, {
+      const response = await fetch(`http://localhost:3000/todos/${title}`, {
         method: 'POST'
       });
       if (response.ok) {
