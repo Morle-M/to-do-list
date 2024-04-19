@@ -6,6 +6,8 @@ services:
     ports:
       - "3000:3000"
     restart: always
+    depends_on:
+      - database
   database:
     build: ./database
     ports:
