@@ -1,5 +1,3 @@
-// Assuming you have already set up your Express app and connected to your PostgreSQL database
-
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
@@ -9,7 +7,6 @@ app.use(express.json());
 app.use(cors());
 const port = 3000;
 
-// PostgreSQL connection configuration
 const pool = new Pool({
   user: 'postgres',
   host: 'database',
@@ -53,7 +50,6 @@ app.get('/todos/:id', async (req, res) => {
   }
 });
 
-// Add item route
 app.post('/todos/:title', async (req, res) => {
     const { title } = req.params;
   
@@ -67,7 +63,6 @@ app.post('/todos/:title', async (req, res) => {
       const values = [title];
       const result = await pool.query(query, values);
   
-      // Send the newly added item as the response
       res.status(201).json(result.rows[0]);
     } catch (error) {
       console.error('Error adding item:', error);
@@ -75,7 +70,6 @@ app.post('/todos/:title', async (req, res) => {
     }
   });
 
-  // Add item route
 app.put('/todos/:id/:text', async (req, res) => {
     const { id ,text } = req.params;
     try {

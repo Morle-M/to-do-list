@@ -15,6 +15,14 @@ services:
     volumes:
       - 'database:/bitnami/postgresql'
     restart: always
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - database
+      - backend
 volumes:
   database:
     driver: local

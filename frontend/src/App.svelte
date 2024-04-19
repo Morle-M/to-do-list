@@ -1,4 +1,3 @@
-<!-- App.svelte -->
 <script>
   import TodoList from './TodoList.svelte';
   import AddTodo from './AddTodo.svelte';
