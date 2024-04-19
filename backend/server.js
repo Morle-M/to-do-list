@@ -40,7 +40,11 @@ app.get('/todos/:id', async (req, res) => {
     `;
     const values = [id];
     const result = await pool.query(query, values);
-    res.status(200).json(result.rows);
+    if (result.rows.length === 0) {
+      res.status(404).json({ error: 'Todo with ID not found' });
+    } else {
+      res.status(200).json(result.rows);
+    }
   } catch (error) {
     console.error('Error adding item:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -72,17 +76,32 @@ app.post('/todos/:title', async (req, res) => {
   // Add item route
 app.put('/todos/:id/:text', async (req, res) => {
     const { id ,text } = req.params;
-  
     try {
       const query = ` 
-      UPDATE todo
-      SET text = $2
-      WHERE todo_id = $1;`;
-      const values = [ id, text];
+      SELECT *
+      FROM todo
+      WHERE todo_id = $1
+      `;
+      const values = [ id ];
       const result = await pool.query(query, values);
-      res.status(200).json({message: 'Updated!'});
+      if (result.rows.length === 0) {
+        res.status(404).json({ error: 'Todo with ID not found' });
+      } else {
+        try {
+          const query = ` 
+          UPDATE todo
+          SET text = $2
+          WHERE todo_id = $1;`;
+          const values = [ id, text];
+          const result = await pool.query(query, values);
+          res.status(200).json({message: 'Updated!'});
+        } catch (error) {
+          console.error('Error adding item:', error);
+          res.status(500).json({ error: 'Internal Server Error' });
+        }
+      }
     } catch (error) {
-      console.error('Error adding item:', error);
+      console.error('Error editing item:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
