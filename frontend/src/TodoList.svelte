@@ -1,11 +1,10 @@
 <script>
     import { onMount } from 'svelte';
     import { writable } from 'svelte/store';
-  
     let todos = writable([]);
 
     async function fetchTodos() {
-      const response = await fetch('http://localhost:3000/todos');
+      const response = await fetch(`${API_URL}/todos`);
       const data = await response.json();
       todos.set(data);
     }
@@ -13,7 +12,7 @@
     onMount(fetchTodos);
 
     async function deleteTodo(todoId) {
-      const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
+      const response = await fetch(`${API_URL}/todos/${todoId}`, {
         method: 'DELETE'
       });
       if (response.ok) {
@@ -22,7 +21,7 @@
     }
   
     async function updateTodoName(todoId, newName) {
-      const response = await fetch(`http://localhost:3000/todos/${todoId}/${newName}`, {
+      const response = await fetch(`${API_URL}/todos/${todoId}/${newName}`, {
         method: 'PUT'
       });
       if (response.ok) {

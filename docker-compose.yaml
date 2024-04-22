@@ -16,7 +16,10 @@ services:
       - 'database:/bitnami/postgresql'
     restart: always
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        - API_URL=http://localhost:3000
     ports:
       - "8080:8080"
     restart: always
