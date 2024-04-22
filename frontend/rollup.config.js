@@ -6,7 +6,9 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
 import replace from '@rollup/plugin-replace';
+import copy from 'rollup-plugin-copy';
 
+const version = +new Date;
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
@@ -36,7 +38,7 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		file: 'public/build/${version}/bundle.js'
 	},
 	plugins: [
 		svelte({
@@ -45,6 +47,15 @@ export default {
 				dev: !production
 			}
 		}),
+		copy({
+            targets: [
+                {
+                    src:'src/static/*.html',
+                    dest: 'public',
+                    transform: (contents) => contents.toString().replace(/__VERSION__/g, hash)
+                }
+            ],
+        }),
 		replace({
             API_URL: JSON.stringify(process.env.API_URL),
         }),
