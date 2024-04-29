@@ -103,15 +103,15 @@ app.put('/todos/:id/:text', async (req, res) => {
     }
   });
 
-  app.delete('/todos/:todo_id', async (req, res) => {
-    const { todo_id } = req.params;
+  app.delete('/todos/:todo_name', async (req, res) => {
+    const { todo_name } = req.params;
   
     try {
       const query = ` 
       DELETE FROM todo
-      WHERE todo_id = $1;
+      WHERE text = $1;
       `;
-      const values = [ todo_id ];
+      const values = [ todo_name ];
       const result = await pool.query(query, values);
       res.status(200).json({message: 'Deleted!'});
     } catch (error) {
