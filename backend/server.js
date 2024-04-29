@@ -64,7 +64,7 @@ app.post('/todos/:title', async (req, res) => {
       const values = [title];
       const result = await pool.query(query, values);
   
-      res.status(201).json(result.rows[0]);
+      res.status(201).send(`Todo with ${title} `);
     } catch (error) {
       console.error('Error adding item:', error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -113,7 +113,7 @@ app.put('/todos/:id/:text', async (req, res) => {
       `;
       const values = [ todo_name ];
       const result = await pool.query(query, values);
-      res.status(200).json({message: 'Deleted!'});
+      res.status(200).send(`${todo_name} deleted!`);
     } catch (error) {
       console.error('Error adding item:', error);
       res.status(500).json({ error: 'Internal Server Error' });
