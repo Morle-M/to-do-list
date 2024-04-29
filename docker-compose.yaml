@@ -19,7 +19,7 @@ services:
     build:
       context: ./frontend
       args:
-        - API_URL=https://ubiquitous-palm-tree-9j9qw55466qfqv-3000.app.github.dev
+        - API_URL=http://localhost:3000
     ports:
       - "8080:8080"
     restart: always

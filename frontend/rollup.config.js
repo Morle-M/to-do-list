@@ -38,7 +38,7 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/${version}/bundle.js'
+		file: 'public/build/bundle.js'
 	},
 	plugins: [
 		svelte({
@@ -47,15 +47,6 @@ export default {
 				dev: !production
 			}
 		}),
-		copy({
-            targets: [
-                {
-                    src:'src/static/*.html',
-                    dest: 'public',
-                    transform: (contents) => contents.toString().replace(/__VERSION__/g, hash)
-                }
-            ],
-        }),
 		replace({
             API_URL: JSON.stringify(process.env.API_URL),
         }),
