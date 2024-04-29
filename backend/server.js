@@ -22,7 +22,8 @@ app.get('/todos', async (req, res) => {
     FROM todo
     `;
     const result = await pool.query(query);
-    res.status(200).json(result.rows);
+    const texts = result.rows.map(todo => todo.text);
+    res.status(200).json(texts);
   } catch (error) {
     console.error('Error adding item:', error);
     res.status(500).json({ error: 'Internal Server Error' });
