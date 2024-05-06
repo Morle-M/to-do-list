@@ -13,11 +13,11 @@ This repository contains a simple Express backend application connected to a Pos
 
 1. Clone this repository to your local machine:
 ```bash
-git clone <repository-url>
+git clone https://github.com/Morle-M/to-do-list.git
 ```
 2. Navigate to the project directory:
 ```bash
-cd <project-directory>
+cd to-do-list
 ```
 
 ### Usage
@@ -72,6 +72,3 @@ The Docker Compose file (`docker-compose.yml`) contains the configuration for bo
 
 Contributions are welcome! Feel free to submit pull requests or open issues for any improvements or bug fixes.
 
-### License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
