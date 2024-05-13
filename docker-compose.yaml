@@ -5,11 +5,11 @@ services:
     build: ./backend
     ports:
       - "3000:3000"
-    environemnt:
-      - DBUSER=postgres
-      - DBHOST=database
-      - DBDATABASE=postgres
-      - DBPORT=5432
+    environment:
+      DBUSER: postgres
+      DBHOST: database
+      DBDATABASE: postgres
+      DBPORT: 5432
     restart: always
     depends_on:
       - database
