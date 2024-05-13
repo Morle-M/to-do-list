@@ -23,7 +23,7 @@ services:
       - "5432:5432"
     volumes:
       - 'database:/bitnami/postgresql'
-      - ./database/scripts/init.sql:/docker-entrypoint-initdb.d
+      - ./database/scripts:/docker-entrypoint-initdb.d
     restart: always
 volumes:
   database:
