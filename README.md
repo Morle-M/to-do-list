@@ -40,12 +40,12 @@ The backend server will start on `http://localhost:3000`.
   - Status Code: 200 (OK)
   - Body: An array of todo texts
 
-#### 2. POST /todos/:title
+#### 2. POST /todos/:todo_name
 
 - Description: Adds a new todo item to the database.
 - Method: POST
 - Parameters:
-  - `title`: The text of the todo item
+  - `todo_name`: The text of the todo item
 - Response:
   - Status Code: 201 (Created)
   - Body: Confirmation message
