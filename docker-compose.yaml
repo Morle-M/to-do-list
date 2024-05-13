@@ -14,14 +14,16 @@ services:
     depends_on:
       - database
   database:
-    build: ./database
+    image: docker.io/bitnami/postgresql:15
+    environment:
+      ALLOW_EMPTY_PASSWORD: 'yes'
+      POSTGRESQL_USERNAME: 'postgres'
+      POSTGRESQL_DATABASE: 'postgres'
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRESQL_USERNAME=postgres
-      - POSTGRESQL_DATABASE=postgres
     volumes:
       - 'database:/bitnami/postgresql'
+      - ./database/scripts/init.sql:/docker-entrypoint-initdb.d
     restart: always
 volumes:
   database:
