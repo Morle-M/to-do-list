@@ -49,7 +49,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: todo-backend:latest
+          image: mmalach/todo-backend:v1
           build:
             context: ./backend
             dockerfile: Dockerfile
@@ -82,22 +82,26 @@ spec:
     spec:
       containers:
         - name: database
-          image: todo-databse:latest
-          build:
-            context: ./database
-            dockerfile: Dockerfile
+          image: docker.io/bitnami/postgresql:15
+          env:
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "yes"
+            - name: POSTGRESQL_USERNAME
+              value: "postgres"
+            - name: POSTGRESQL_DATABASE
+              value: "postgres"
           ports:
             - containerPort: 5432
-          env:
-            - name: POSTGRES_USER
-              value: postgres
-            - name: POSTGRES_DB
-              value: postgres
           volumeMounts:
             - name: database-volume
               mountPath: /bitnami/postgresql
+            - name: init-scripts
+              mountPath: /docker-entrypoint-initdb.d  # Volume-Mount für die Initialisierungsskripte hinzugefügt
       volumes:
         - name: database-volume
           persistentVolumeClaim:
             claimName: database-pvc
+        - name: init-scripts
+          hostPath:
+            path: ./database/scripts   # Anpassen des Pfads zu deinen Skripten auf dem Host-System
       restartPolicy: Always
