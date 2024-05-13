@@ -8,10 +8,10 @@ app.use(cors());
 const port = 3000;
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'postgres',
-  port: 5432,
+  user: process.env.DBUSER,
+  host: process.env.DBHOST,
+  database: process.env.DBDATABASE,
+  port: process.env.DBPORT,
 });
 
 app.get('/todos', async (req, res) => {
