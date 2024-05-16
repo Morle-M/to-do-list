@@ -29,8 +29,8 @@ app.get('/todos', async (req, res) => {
   }
 });
 
-app.post('/todos/:title', async (req, res) => {
-    const { title } = req.params;
+app.post('/todos/:todo_name', async (req, res) => {
+    const { todo_name } = req.params;
   
     try {
       const query = ` 
@@ -39,10 +39,10 @@ app.post('/todos/:title', async (req, res) => {
         (SELECT COALESCE(MAX(todo_id), 0) + 1 FROM todo),
         $1
     ) RETURNING todo_id`;
-      const values = [title];
+      const values = [todo_name];
       const result = await pool.query(query, values);
   
-      res.status(201).send(`Todo with ${title} `);
+      res.status(201).send(`Todo with ${todo_name} `);
     } catch (error) {
       console.error('Error adding item:', error);
       res.status(500).json({ error: 'Internal Server Error' });
