@@ -1,6 +1,12 @@
 version: '3.8'
 
 services:
+  todoui-thymeleaf:
+    image: maeddes/todoui-thymeleaf:hse24
+    ports:
+      - "8090:8090"
+    environment:
+      - BACKEND_URL=http://backend:3000/
   backend:
     build:
       context: ./backend
